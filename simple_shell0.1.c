@@ -71,15 +71,16 @@ void _free(char *com)
 void _execute(char *str, char **env)
 {
 	char *argv[] = {NULL, NULL}, *command = NULL;
-	char *buffer = ": No such file or directory\n";
-	char *error_message;
 	size_t len = 1;
 	ssize_t nread, pid;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
+		{
+			signal(SIGINT, signal_handler);
 			write(1, "Shell$ ", 7);
+		}
 		nread = getline(&command, &len, stdin);
 		if (nread == -1)
 		{
@@ -98,10 +99,7 @@ void _execute(char *str, char **env)
 			else if (pid == 0)
 			{
 				if (execve(argv[0], argv, env) == -1)
-				{
-					error_message = _append(&str, buffer);
-					write(2, error_message, _strlen(error_message));
-				}
+					print_error(str);
 				free(command);
 				exit(0);
 			}

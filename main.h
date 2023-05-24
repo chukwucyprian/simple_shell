@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <stddef.h>
 #include <string.h>
+#include <signal.h>
 char *_remove(char **str);
 char *_append(char **str1, char *buffer);
 size_t _strlen(char *str);
@@ -20,5 +21,7 @@ char **parse(char *str, char **argv);
 void com_test(char **argv, char **envir, char *str);
 void handle_exit(char *com);
 void handle_env(char *com, char **envir);
+void print_error(char *str);
+void signal_handler(int signal);
 #endif
 
