@@ -10,7 +10,7 @@
 #include <string.h>
 #include <signal.h>
 char *_remove(char **str);
-char *_append(char **str1, char *buffer);
+char *_append(char *str1, char *buffer);
 size_t _strlen(char *str);
 void _execute(char *str, char **env);
 char *_modify(char **str, char cha, char *str1);

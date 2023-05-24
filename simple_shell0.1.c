@@ -31,27 +31,6 @@ size_t _strlen(char *str)
 	return (i);
 }
 /**
- * _append - appends a string
- * @str1: First string
- * @buffer: Append characters
- * Return: Appended string
- */
-char *_append(char **str1, char *buffer)
-{
-	char *ptr = *str1;
-	size_t i, j = 0;
-
-	i = _strlen(ptr);
-
-	while ((ptr[i] = buffer[j]) != '\0')
-	{
-		i++;
-		j++;
-	}
-	ptr[i] = buffer[j];
-	return (ptr);
-}
-/**
  * _free - deallocates memory
  * @com: string
  * Return: Nothing
@@ -59,7 +38,6 @@ char *_append(char **str1, char *buffer)
 void _free(char *com)
 {
 	free(com);
-	write(1, "\n", 1);
 	exit(0);
 }
 /**
@@ -73,6 +51,7 @@ void _execute(char *str, char **env)
 	char *argv[] = {NULL, NULL}, *command = NULL;
 	size_t len = 1;
 	ssize_t nread, pid;
+	struct stat buffer;
 
 	while (1)
 	{
@@ -83,28 +62,26 @@ void _execute(char *str, char **env)
 		}
 		nread = getline(&command, &len, stdin);
 		if (nread == -1)
-		{
-			free(command);
-			if (isatty(STDIN_FILENO))
-				write(1, "\n", 1);
-			exit(0);
-		}
+			_free(command);
 		command = _remove(&command);
 		if (command[0] != '\0')
 		{
-			argv[0] = command;
-			pid = fork();
-			if (pid == -1)
-				_free(command);
-			else if (pid == 0)
+			if (stat(command, &buffer) == 0)
 			{
-				if (execve(argv[0], argv, env) == -1)
-					print_error(str);
-				free(command);
-				exit(0);
+				argv[0] = command;
+				pid = fork();
+				if (pid == -1)
+					_free(command);
+				else if (pid == 0)
+				{
+					execve(argv[0], argv, env);
+					exit(0);
+				}
+				else
+					wait(NULL);
 			}
 			else
-				wait(NULL);
+				print_error(str);
 		}
 	}
 }
