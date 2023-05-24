@@ -22,9 +22,9 @@ void print_error(char *str)
 	char error_message[40];
 	size_t i = 0, k = 0, len;
 
-	while ((error_message[i] = str[i]) != '\0')
+	while ((error_message[i] = str[i]))
 		i++;
-	while ((error_message[i++] = buffer[k++]) != '\0')
+	while ((error_message[i++] = buffer[k++]))
 		;
 	error_message[i] = buffer[k];
 

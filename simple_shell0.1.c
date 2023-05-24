@@ -26,7 +26,7 @@ size_t _strlen(char *str)
 {
 	size_t i = 0;
 
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -58,13 +58,13 @@ void _execute(char *str, char **env)
 		if (isatty(STDIN_FILENO))
 		{
 			signal(SIGINT, signal_handler);
-			write(1, "Shell$ ", 7);
+			write(1, "$ ", 2);
 		}
 		nread = getline(&command, &len, stdin);
 		if (nread == -1)
 			_free(command);
 		command = _remove(&command);
-		if (command[0] != '\0')
+		if (command[0])
 		{
 			if (stat(command, &buffer) == 0)
 			{
