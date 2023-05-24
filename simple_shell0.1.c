@@ -52,6 +52,17 @@ char *_append(char **str1, char *buffer)
 	return (ptr);
 }
 /**
+ * _free - deallocates memory
+ * @com: string
+ * Return: Nothing
+ */
+void _free(char *com)
+{
+	free(com);
+	write(1, "\n", 1);
+	exit(0);
+}
+/**
  * _execute - executes the user given command
  * @str: arguments
  * @env: Environmental variables
@@ -77,24 +88,26 @@ void _execute(char *str, char **env)
 				write(1, "\n", 1);
 			exit(0);
 		}
-		argv[0] = _remove(&command);
-		pid = fork();
-		if (pid == -1)
+		command = _remove(&command);
+		if (command[0] != '\0')
 		{
-			free(command);
-			exit(0);
-		}
-		else if (pid == 0)
-		{
-			if (execve(argv[0], argv, env) == -1)
+			argv[0] = command;
+			pid = fork();
+			if (pid == -1)
+				_free(command);
+			else if (pid == 0)
 			{
-				error_message = _append(&str, buffer);
-				write(2, error_message, _strlen(error_message));
+				if (execve(argv[0], argv, env) == -1)
+				{
+					error_message = _append(&str, buffer);
+					write(2, error_message, _strlen(error_message));
+				}
+				free(command);
+				exit(0);
 			}
-			exit(0);
+			else
+				wait(NULL);
 		}
-		else
-			wait(NULL);
 	}
 }
 
