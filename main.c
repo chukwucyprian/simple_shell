@@ -9,7 +9,7 @@
 int main(int argc, char *argv[], char **env)
 {
 	if (argc == 1)
-		_execute(argv[0], env, 1);
+		_execute(argv[0], env);
 	return (0);
 }
 
