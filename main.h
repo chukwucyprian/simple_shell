@@ -12,7 +12,12 @@
 char *_remove(char **str);
 char *_append(char **str1, char *buffer);
 size_t _strlen(char *str);
-void _execute(char *str, char **env);
+void execute_interactive(char **env);
+void execute_non_interactive(char **env, char *str);
+void handle_command(char *command, char **env);
+void execute_command(char *command, char **env);
+void print_error_message(char *executable, char *command);
+void _execute(char *str, char **env, int interactive);
 char *_modify(char **str, char cha, char *str1);
 char *_locate(char **com, char *path);
 char *_path(char **envr, char **pth);
