@@ -1,36 +1,5 @@
 #include "main.h"
 /**
- * _remove - removes the newline character
- * @str: string
- * Return: modified string
- */
-char *_remove(char **str)
-{
-	char *ptr = *str;
-	size_t i = 0;
-
-	while (ptr[i])
-	{
-		if (ptr[i] == '\n')
-			ptr[i] = '\0';
-		i++;
-	}
-	return (ptr);
-}
-/**
- * _strlen - computes string's length
- * @str: string
- * Return: string length
- */
-size_t _strlen(char *str)
-{
-	size_t i = 0;
-
-	while (str[i])
-		i++;
-	return (i);
-}
-/**
  * _free - deallocates memory
  * @com: string
  * Return: Nothing
@@ -48,7 +17,7 @@ void _free(char *com)
  */
 void _execute(char *str, char **env)
 {
-	char *argv[] = {NULL, NULL}, *command = NULL;
+	char *argv[2] = {NULL, NULL}, *command = NULL;
 	size_t len = 1;
 	ssize_t nread, pid;
 	struct stat buffer;
@@ -64,6 +33,9 @@ void _execute(char *str, char **env)
 		if (nread == -1)
 			_free(command);
 		command = _remove(&command);
+		if (command[0])
+			if (space_track(command) == 1)
+				command = space_handle(&command);
 		if (command[0])
 		{
 			if (stat(command, &buffer) == 0)
