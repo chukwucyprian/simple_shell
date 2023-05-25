@@ -17,7 +17,7 @@ char *_modify(char **str, char cha, char *str1);
 char *_locate(char **com, char *path);
 char *_path(char **envr, char **pth);
 char *new_string(char **str, char *command);
-char **parse(char *str, char **argv);
+char **parse(char *str, char *argv[]);
 void com_test(char **argv, char **envir, char *str);
 void handle_exit(char *com);
 void handle_env(char *com, char **envir);
