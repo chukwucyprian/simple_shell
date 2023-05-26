@@ -61,7 +61,7 @@ void com_test(char *argv[], char **envir)
 void _execute(char *str, char **env)
 {
 	char *argv[10], *command = NULL, *cmpth, *path;
-	size_t len = 1;
+	size_t len = 1, ex_status = 0;
 	ssize_t nread, pid;
 
 	cmpth = malloc(100);
@@ -76,10 +76,9 @@ void _execute(char *str, char **env)
 		nread = getline(&command, &len, stdin);
 		if (nread == -1)
 			multi_free(command, cmpth, path);
-		command = _remove(&command);
-		if (command[0])
-			if (space_track(command) == 1)
-				command = space_handle(&command);
+		ex_status = handle_exit(command);
+		if (ex_status == 1)
+			multi_free(command, cmpth, path);
 		if (cmpth[0])
 			empty_string(&cmpth);
 		if (command[0])
