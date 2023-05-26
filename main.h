@@ -40,5 +40,21 @@ void _free(char *com);
 void com_location(char *cmpt, char *com, char *path, char **env);
 void memory_error(char *str);
 void _promt();
+char *append_to_line(char *line, size_t line_size, char c);
+char *custom_getline(void);
+void execute_single_command(char *command, char **env);
+void print_error_message(char *command, char *error_msg);
+char *concat_strings(char *str1, char *str2);
+char *get_program_name(char *command);
+
+
+
+
+
+#define BUFFER_SIZE 1024
+
+
+
+
 #endif
 
