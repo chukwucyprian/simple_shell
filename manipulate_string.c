@@ -71,4 +71,34 @@ char *_strdup(char **strd, char *ostr)
 
 	return (ptr);
 }
+/**
+ * _append - appends a string
+ * @str: First string
+ * @buffer: Append characters
+ * Return: Appended string
+ */
+char *_append(char *str, char *buffer)
+{
+	char *ptr = str;
+	size_t i = 0, j = 0;
+
+	i = _strlen(ptr);
+
+	while (buffer[j] != '\0')
+	{
+		if (buffer[j] == ' ')
+		{
+			while (buffer[j] != '\0')
+			{
+				ptr[i] = buffer[j];
+				i++;
+				j++;
+			}
+			ptr[i] = buffer[j];
+			return (ptr);
+		}
+		j++;
+	}
+	return (ptr);
+}
 
