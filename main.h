@@ -48,6 +48,8 @@ char *concat_strings(char *str1, char *str2);
 char *get_program_name(char *command);
 size_t tokenize(char *str, char *tokens[]);
 int handle_exit_status(char *command);
+int handle_setenv(char *command);
+int handle_unsetenv(char *command);
 
 
 
