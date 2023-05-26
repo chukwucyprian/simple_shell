@@ -36,6 +36,12 @@ void execute_command(char *command, char **env);
 void print_error_message(char *executable, char *command);
 char *append_to_line(char *line, size_t line_size, char c);
 char *custom_getline(void);
+void execute_single_command(char *command, char **env);
+void print_error_message(char *command, char *error_msg);
+char *concat_strings(char *str1, char *str2);
+char *get_program_name(char *command);
+
+
 
 
 
