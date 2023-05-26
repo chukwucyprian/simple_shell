@@ -47,7 +47,7 @@ void print_error_message(char *command, char *error_msg);
 char *concat_strings(char *str1, char *str2);
 char *get_program_name(char *command);
 size_t tokenize(char *str, char *tokens[]);
-extern char **environ;
+int handle_exit_status(char *command);
 
 
 
