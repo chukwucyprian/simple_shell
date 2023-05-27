@@ -87,6 +87,7 @@ void _execute(char *str, char **env)
 		{
 			_append(cmpth, command);
 			parse(cmpth, argv);
+			handle_env(argv[0], env);
 			pid = fork();
 			if (pid == -1)
 				_free(command);
