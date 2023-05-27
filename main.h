@@ -33,7 +33,6 @@ void execute_interactive(char **env);
 void execute_non_interactive(char **env, char *str);
 void handle_command(char *command, char **env);
 void execute_command(char *command, char **env);
-void print_error_message(char *executable, char *command);
 void com_test(char *argv[], char **envir);
 void multi_free(char *com, char *cmpt, char *path);
 void _free(char *com);
