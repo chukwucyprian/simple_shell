@@ -33,6 +33,7 @@ void execute_interactive(char **env);
 void execute_non_interactive(char **env, char *str);
 void handle_command(char *command, char **env);
 void execute_command(char *command, char **env);
+void print_error_message(char *executable, char *command);
 void com_test(char *argv[], char **envir);
 void multi_free(char *com, char *cmpt, char *path);
 void _free(char *com);
@@ -47,6 +48,11 @@ char *concat_strings(char *str1, char *str2);
 char *get_program_name(char *command);
 size_t tokenize(char *str, char *tokens[]);
 int handle_exit_status(char *command);
+int handle_setenv(char *command);
+int handle_unsetenv(char *command);
+int handle_cd(char *command);
+int handle_cd_arg(char *arg);
+int handle_cd_no_arg(void);
 
 
 
