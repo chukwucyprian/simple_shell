@@ -9,6 +9,8 @@
 #include <stddef.h>
 #include <string.h>
 #include <signal.h>
+#include <errno.h>
+
 char *_remove(char **str);
 char *_append(char *str1, char *buffer);
 size_t _strlen(char *str);
@@ -51,10 +53,6 @@ int handle_exit_status(char *command);
 int handle_setenv(char *command);
 int handle_unsetenv(char *command);
 int handle_cd(char *command);
-int handle_cd_arg(char *arg);
-int handle_cd_no_arg(void);
-
-
 
 
 
